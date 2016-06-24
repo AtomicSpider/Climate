@@ -23,9 +23,13 @@ import com.satandigital.climate.helpers.Utility;
 public class MainActivity extends AppCompatActivity {
 
     private String TAG = "MainActivity";
+    private final String FORECASTFRAGMENT_TAG = "FFTAG";
+
+    private String mLocation;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        mLocation = Utility.getPreferredLocation(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private void attachFragment(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new ForecastFragment())
+                    .add(R.id.container, new ForecastFragment(), FORECASTFRAGMENT_TAG)
                     .commit();
         }
     }
@@ -78,6 +82,20 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Log.i(TAG, "No receiving apps installed!");
             Toast.makeText(MainActivity.this, "No Map apps installed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String location = Utility.getPreferredLocation( this );
+        // update the location in our second pane using the fragment manager
+        if (location != null && !location.equals(mLocation)) {
+            ForecastFragment ff = (ForecastFragment)getSupportFragmentManager().findFragmentByTag(FORECASTFRAGMENT_TAG);
+            if ( null != ff ) {
+                ff.onLocationChanged();
+            }
+            mLocation = location;
         }
     }
 }
