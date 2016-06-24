@@ -44,6 +44,9 @@ public class DetailActivityFragment extends Fragment {
         Intent mIntent = getActivity().getIntent();
         if (mIntent != null && mIntent.hasExtra(Intent.EXTRA_TEXT)) {
             mForecastStr = mIntent.getStringExtra(Intent.EXTRA_TEXT);
+        }
+
+        if (null != mForecastStr) {
             ((TextView) rootView.findViewById(R.id.detail_text)).setText(mForecastStr);
         }
 
