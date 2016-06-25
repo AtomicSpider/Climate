@@ -19,7 +19,6 @@ import android.annotation.TargetApi;
 import android.database.Cursor;
 import android.test.AndroidTestCase;
 
-import com.satandigital.climate.helpers.FetchWeatherTask;
 import com.satandigital.climate.data.WeatherContract;
 
 public class TestFetchWeatherTask extends AndroidTestCase{

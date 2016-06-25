@@ -13,22 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.satandigital.climate.helpers;
+package com.satandigital.climate;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.text.format.Time;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
-import com.satandigital.climate.R;
 import com.satandigital.climate.data.WeatherContract;
 import com.satandigital.climate.data.WeatherContract.WeatherEntry;
 
@@ -42,8 +37,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Vector;
 
 public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
@@ -116,7 +109,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
      * into an Object hierarchy for us.
      */
     private void getWeatherDataFromJson(String forecastJsonStr,
-                                        String locationSetting)
+                                            String locationSetting)
             throws JSONException {
 
         // Now we have a String representing the complete forecast in JSON Format.
@@ -274,7 +267,6 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
         String format = "json";
         String units = "metric";
         int numDays = 14;
-        String appId = mContext.getResources().getString(R.string.open_weather_map_api_key);
 
         try {
             // Construct the URL for the OpenWeatherMap query
@@ -293,7 +285,8 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
                     .appendQueryParameter(FORMAT_PARAM, format)
                     .appendQueryParameter(UNITS_PARAM, units)
                     .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
-                    .appendQueryParameter(APPID_PARAM, appId).build();
+                    .appendQueryParameter(APPID_PARAM, BuildConfig.OPEN_WEATHER_MAP_API_KEY)
+                    .build();
 
             URL url = new URL(builtUri.toString());
 

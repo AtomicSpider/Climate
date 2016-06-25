@@ -12,7 +12,6 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <provider
@@ -20,7 +19,7 @@
             android:authorities="com.satandigital.climate" />
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,20 +27,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.DetailActivity"
+            android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.satandigital.climate.activities.MainActivity" />
+                android:value="com.satandigital.climate.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.satandigital.climate.activities.MainActivity" />
+                android:value="com.satandigital.climate.MainActivity" />
         </activity>
     </application>
 
