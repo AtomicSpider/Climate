@@ -18,6 +18,10 @@
             android:name=".data.WeatherProvider"
             android:authorities="com.satandigital.climate" />
 
+        <service android:name=".service.ClimateService"/>
+
+        <receiver android:name=".service.ClimateService$AlarmReceiver" android:enabled="true"/>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
